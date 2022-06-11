@@ -32,7 +32,7 @@ st.write(df)
 url = "https://raw.githubusercontent.com/hasniera/dataexercise/main/data%20(1).csv"
 private = pd.read_csv(url)
 
-X = private[['private', 'apps', 'accept', 'enroll', 'top10per', 'top25per', 'f_undergrad', 'p_undergrad', 'outstate', 'room_board', 'books', 'personal', 'phd', 'terminal', 's_f_ratio', 'perc_alumni', 'expend']]
+X = private[['accept', 'enroll', 'f_undergrad', 'p_undergrad', 'phd']]
 Y = private['grad_rate']
 
 pss = RandomForestClassifier()
@@ -41,12 +41,12 @@ pss.fit(X, Y)
 prediction = pss.predict(df)
 prediction_proba = pss.predict_proba(df)
 
-st.subheader('Class labels and their corresponding index number')
+st.subheader('number of student accept per grad_rate')
 st.write(private['grad_rate'].unique())
-#st.write(['Iris-setosa','Iris-versicolor','Iris-virginica')]
+#st.write(['accept', 'enroll')]
 
 st.subheader('Prediction')
-#st.write(iris.target_names[prediction])
+#st.write(private.target_names[prediction])
 st.write(prediction)
 
 st.subheader('Prediction Probability')
