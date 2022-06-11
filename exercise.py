@@ -11,14 +11,16 @@ This app predicts the number of student enroll private school!
 st.sidebar.header('User Input Parameters')
 
 def user_input_features():
-    sepal_length = st.sidebar.slider('Sepal length', 4.3, 7.9, 5.4)
-    sepal_width = st.sidebar.slider('Sepal width', 2.0, 4.4, 3.4)
-    petal_length = st.sidebar.slider('Petal length', 1.0, 6.9, 1.3)
-    petal_width = st.sidebar.slider('Petal width', 0.1, 2.5, 0.2)
-    data = {'sepal_length': sepal_length,
-            'sepal_width': sepal_width,
-            'petal_length': petal_length,
-            'petal_width': petal_width}
+    accept = st.sidebar.slider('accept', 100, 1000, 10000)
+    enroll = st.sidebar.slider('enroll', 50, 500, 5000)
+    f_undergrad = st.sidebar.slider('f_undergrad', 100, 1000, 10000)
+    p_undergrad = st.sidebar.slider('p_undergrad', 0, 500, 5000)
+    phd = st.sidebar.slider('phd', 20, 50, 100)
+    data = {'accept': accept,
+            'enroll': enroll,
+            'f_undergrad': f_undergrad,
+            'p_undergrad': p_undergrad,
+            'phd': phd}
     features = pd.DataFrame(data, index=[0])
     return features
 
@@ -28,19 +30,19 @@ st.subheader('User Input parameters')
 st.write(df)
 
 url = "https://raw.githubusercontent.com/hasniera/dataexercise/main/data%20(1).csv"
-iris = pd.read_csv(url)
+private = pd.read_csv(url)
 
-X = iris[['sepal_length','sepal_width', 'petal_length', 'petal_width']]
-Y = iris['species']
+X = private[['private', 'apps', 'accept', 'enroll', 'top10per', 'top25per', 'f_undergrad', 'p_undergrad', 'outstate', 'room_board', 'books', 'personal', 'phd', 'terminal', 's_f_ratio', 'perc_alumni', 'expend']]
+Y = private['grad_rate']
 
-clf = RandomForestClassifier()
-clf.fit(X, Y)
+pss = RandomForestClassifier()
+pss.fit(X, Y)
 
-prediction = clf.predict(df)
-prediction_proba = clf.predict_proba(df)
+prediction = pss.predict(df)
+prediction_proba = pss.predict_proba(df)
 
 st.subheader('Class labels and their corresponding index number')
-st.write(iris['species'].unique())
+st.write(private['grad_rate'].unique())
 #st.write(['Iris-setosa','Iris-versicolor','Iris-virginica')]
 
 st.subheader('Prediction')
