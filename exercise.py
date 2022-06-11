@@ -27,7 +27,7 @@ df = user_input_features()
 st.subheader('User Input parameters')
 st.write(df)
 
-url = "https://raw.githubusercontent.com/hasniera/final_assignment/main/IRIS.csv"
+url = "https://raw.githubusercontent.com/hasniera/dataexercise/main/data%20(1).csv"
 iris = pd.read_csv(url)
 
 X = iris[['sepal_length','sepal_width', 'petal_length', 'petal_width']]
