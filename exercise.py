@@ -4,8 +4,8 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
 st.write("""
-# Data of Attended Private School
-This app predicts the student enroll private school!
+# Sample of student enroll private school
+This app predicts the number of student enroll private school!
 """)
 
 st.sidebar.header('User Input Parameters')
@@ -27,9 +27,11 @@ df = user_input_features()
 st.subheader('User Input parameters')
 st.write(df)
 
-iris = datasets.load_iris()
-X = iris.data
-Y = iris.target
+url = "https://raw.githubusercontent.com/hasniera/final_assignment/main/IRIS.csv"
+iris = pd.read_csv(url)
+
+X = iris[['sepal_length','sepal_width', 'petal_length', 'petal_width']]
+Y = iris['species']
 
 clf = RandomForestClassifier()
 clf.fit(X, Y)
@@ -38,11 +40,12 @@ prediction = clf.predict(df)
 prediction_proba = clf.predict_proba(df)
 
 st.subheader('Class labels and their corresponding index number')
-st.write(iris.target_names)
+st.write(iris['species'].unique())
+#st.write(['Iris-setosa','Iris-versicolor','Iris-virginica')]
 
 st.subheader('Prediction')
-st.write(iris.target_names[prediction])
-#st.write(prediction)
+#st.write(iris.target_names[prediction])
+st.write(prediction)
 
 st.subheader('Prediction Probability')
 st.write(prediction_proba)
