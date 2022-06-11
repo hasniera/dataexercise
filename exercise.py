@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 st.write("""
 # Data of Attended Private School
-This app predicts the **student enroll private school **!
+This app predicts the student enroll private school!
 """)
 
 st.sidebar.header('User Input Parameters')
